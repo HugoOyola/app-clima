@@ -45,3 +45,20 @@ function mostrarError(mensaje) {
   }
 
 }
+
+
+function consultarAPI(ciudad, pais){
+  const appId = '2ef6859276b8a5d42d77aa6ab171b2f5'
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
+
+  fetch (url)
+    .then(respuesta => respuesta.json())
+    .then(datos => {
+      console.log(datos);
+      if(datos.cod === "404") {
+        mostrarError('Ciudad no encontrada');
+        return;
+      }
+    })
+    .catch(error => console.log(error))
+}
